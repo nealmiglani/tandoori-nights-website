@@ -1,0 +1,11 @@
+# build output (deployed separately to gh-pages)
+dist/
+# OS / editor junk
+.DS_Store
+**/.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+
+# Office lock/temp files
+~$*

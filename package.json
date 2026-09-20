@@ -1,0 +1,12 @@
+{
+  "name": "tandoori-nights-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tandoori Nights — static website. Edit content.py, run npm run build.",
+  "scripts": {
+    "build": "python3 build.py",
+    "dev": "python3 build.py && python3 -m http.server 8080 --directory dist",
+    "deploy:netlify": "python3 build.py && npx netlify-cli deploy --prod --dir=dist",
+    "deploy:cloudflare": "python3 build.py && npx wrangler pages deploy dist --project-name tandoori-nights"
+  }
+}

@@ -31,8 +31,8 @@ BUFFET_PRICE = '[$XX]'
 DELIVERY_RADIUS = '[XX] miles'
 LEAD_TIME_TRAYS = '[XX] hours'
 LEAD_TIME_EVENTS = '[XX] weeks'
-YEAR_OPENED = '[YEAR]'
-HOLIDAYS = 'Open most holidays; Thanksgiving and Christmas hours are posted on Google two weeks ahead. [CONFIRM]'
+YEAR_OPENED = '2001'
+HOLIDAYS = 'Open every day of the year, including all holidays. Holiday hours are posted on Google.'
 
 HOURS_TABLE = '''<table class="hours"><caption class="lbl">Hours</caption>
 <tr><th scope="row">Monday – Friday</th><td>11:30am–2:30pm · 4:30–10pm</td></tr>
@@ -44,7 +44,7 @@ HERO_ALT = 'A Tandoori Nights spread: butter chicken, palak paneer, tandoori chi
 MURAL_ALT = 'The mural on the Tandoori Nights dining room wall: a sleeping woman with green hair, a lotus, and a starry blue sky'
 HERO_QUOTE = 'Some of the best Indian food I’ve had this side of the Atlantic.'
 HERO_QUOTE_SRC = 'Tripadvisor review · November 2024'
-HOME_INTRO = 'For over a decade, Tandoori Nights has cooked North Indian food at 106 Market St in Kentlands: butter chicken rated 4.7 across 2,000+ orders, lamb chops off the clay oven, a weekday lunch buffet, and catering for offices, weddings and parties of any size across the DMV. Every dish is cooked to order with fresh, all-natural ingredients.'
+HOME_INTRO = 'Open since 2001, Tandoori Nights has cooked North Indian food at 106 Market St in Kentlands: butter chicken rated 4.7 across 2,000+ orders, lamb chops off the clay oven, a weekday lunch buffet, and catering for offices, weddings and parties of any size across the DMV. Every dish is cooked to order with fresh, all-natural ingredients.'
 HOME_DOORS = [
     ('Pickup &amp; delivery · 2,000+ orders, 4.7★', 'Order online', 'Butter chicken, tikka masala and palak paneer are what Gaithersburg orders most. Order direct through Toast at menu prices — skip the delivery-app markup.', 'Start an order', TOAST),
     ('Monday to Friday · 11:30–2:30', 'Lunch buffet', f'{BUFFET_PRICE} for [X] curries, tandoori chicken, naan from the oven and dessert. Regulars say it keeps getting better.', 'This week’s buffet', '/lunch-buffet/'),
@@ -55,14 +55,14 @@ HOME_CATERING_P = 'Four tray sizes serving 15 to 50 each — order several for l
 HOME_CATERING_ROWS = [
     ('Tray orders', 'Small trays: chicken curry $100, vegetable or dal $75, paneer $85, chicken biryani $100. Naan $2.99 a piece.'),
     ('Full-service buffet', 'We set up, serve and clear. Weddings, receptions, Diwali and office parties. Fill out the catering form and we’ll get back to you.'),
-    ('Private room', 'A set menu in our private room for rehearsal dinners, client dinners and birthdays.'),
+    ('Dining-room buyouts', 'Buy out our Kentlands dining room for a private event — rehearsal dinners, birthdays, client dinners and large groups.'),
 ]
 HOME_FAQ = [
     ('How much does Indian catering cost in Gaithersburg?', 'Trays come in four sizes: small serves 15–20, extra-large 45–50, with multiple XL trays or a full-service buffet for larger groups. A small chicken tray is $100, vegetable or dal $75, paneer $85, chicken biryani $100; naan is $2.99 a piece with a 20-piece minimum. A basic lunch for 15–20 (chicken, vegetable, rice, naan) is about $275, roughly $14–18 a head before delivery. Buffets and prix fixe are quoted through our catering form.'),
     ('Do you deliver in Gaithersburg?', 'Yes. The best way is to order direct through Toast for pickup or delivery — menu prices, no delivery-app markup. Butter chicken is our most-ordered dish, rated 4.7 across more than 2,000 orders.'),
     ('Is there a lunch buffet?', f'Monday to Friday, 11:30am to 2:30pm. {BUFFET_PRICE} per person for [X] curries plus tandoori chicken, naan and dessert.'),
     ('Do you have vegetarian, vegan or gluten-free dishes?', 'Sixteen vegetarian mains, including Palak Paneer, Dal Makhani, Chana Masala and Malai Kofta. The kitchen cooks with less oil and all-natural ingredients. Ask your server about vegan and gluten-free options. [CONFIRM which dishes.]'),
-    ('Where do I park in Kentlands?', f'Free public lot in Kentlands Market Square, steps from the door at 106 Market St. Reservations on OpenTable or at {PHONE}; walk-ins welcome. Private room for up to {ROOM_SEATED}.'),
+    ('Where do I park in Kentlands?', f'Free public lot in Kentlands Market Square, steps from the door at 106 Market St. Reservations on OpenTable or at {PHONE}; walk-ins welcome. Dining-room buyouts available for private events and large groups.'),
 ]
 
 # ---------------- MENU ----------------
@@ -102,8 +102,8 @@ BUFFET_FAQ = [
 ]
 
 # ---------------- CATERING & EVENTS ----------------
-CATERING_DESC = 'Indian catering across the DMV with tray prices on the page: four tray sizes serving 15 to 50 each, order several for larger groups, $100 minimum, rated 5.0. Plus a private dining room in Kentlands for rehearsal dinners, birthdays and team nights.'
-CATERING_H1 = 'Indian catering in Gaithersburg, and a private room when you’d rather come to us.'
+CATERING_DESC = 'Indian catering across the DMV with tray prices on the page: four tray sizes serving 15 to 50 each, order several for larger groups, $100 minimum, rated 5.0. Plus dining-room buyouts in Kentlands for private events, large groups and team nights.'
+CATERING_H1 = 'Indian catering in Gaithersburg — and our dining room for private events when you’d rather come to us.'
 CATERING_INTRO = f'Tandoori Nights has catered offices, weddings and holiday parties across the DMV from its Kentlands kitchen since {YEAR_OPENED}. Every tray is cooked to order in the same tandoor and pots as the dining room — rated 5.0 with 100% on-time delivery. Other Indian caterers in Gaithersburg make you call for a price; ours are right here on the page.'
 CATERING_TILES = [
     ('Trays', 'Small 15–20 · XL 45–50', 'Four sizes of every entrée, rice, appetizer tray and sweet — order several XL trays for larger groups.'),
@@ -112,7 +112,7 @@ CATERING_TILES = [
 ]
 CATERING_FORMATS = [
     ('tandoori-chicken-platter.jpg', 'A tandoori chicken platter from a Tandoori Nights full-service catering buffet', 'Full-service buffet', 'Chafing dishes, staff, setup and cleanup. Wedding receptions, Diwali parties, office holiday lunches. Quoted by headcount.', 'Quoted per guest · via the catering form'),
-    ('private-dining-room.jpg', 'Private dining room set for a prix fixe dinner at Tandoori Nights', 'Prix fixe in the private room', f'A set menu, plated or family-style, in our private room for up to {ROOM_SEATED}. Rehearsal dinners, client dinners, birthdays.', 'Quoted per guest · via the catering form'),
+    ('private-dining-room.jpg', 'The Tandoori Nights dining room set for a private event', 'Private events &amp; buyouts', 'Buy out our dining room for a private event with a set menu, plated or family-style — rehearsal dinners, client dinners, birthdays and large groups.', 'Quoted per guest · via the catering form'),
     ('appetizer-spread.jpg', 'Tandoori Nights appetizers ready for a tray order', 'Tray orders', 'Small, medium, large and extra-large — 15 to 50 people per tray, and order several for bigger groups. Order online for weekday lunch delivery, or call for pickup any day.', 'Trays from $40 · $100 minimum'),
 ]
 TRAY_NOTE = 'Suggested quantities are for a complete menu and are an estimate. A small tray serves 15–20, medium 25–30, large 35–40, extra-large 45–50 — for more than 50, order multiple extra-large trays or ask about a full-service buffet. Appetizers, breads and sweets by the piece, 20-piece minimum.'
@@ -158,10 +158,10 @@ HOW_IT_WORKS = [
     ('Build the menu with us', 'A chicken, a lamb or fish, two vegetarian, rice, naan, one sweet is the usual shape for a mixed crowd. We set spice per tray.'),
     ('Pickup, drop-off or full service', 'Trays arrive labeled, with utensils on request. Buffets arrive with chafing dishes and staff.'),
 ]
-EVENTS_H2 = f'Or bring the party to us: a private room in Kentlands for {ROOM_SEATED}.'
-EVENTS_INTRO = 'Rehearsal dinners, birthdays, client dinners and team nights, in our private room at 106 Market St with a set menu built around the tandoor. Reviewers call the main room “cozy” and “quiet”; the private room has its own door and its own pace. Free lot out front.'
+EVENTS_H2 = 'Or bring the party to us: a private buyout of our Kentlands dining room.'
+EVENTS_INTRO = 'Rehearsal dinners, birthdays, client dinners, team nights and large groups — book a private buyout of our dining room at 106 Market St, with a set menu built around the tandoor. Reviewers call the room “cozy,” “quiet” and “clean and bright.” Free lot out front.'
 EVENT_TILES = [
-    ('The room', f'Seats {ROOM_SEATED}', 'Two long tables or a U. Private entrance. [AV / TV] for slides or a toast. [CONFIRM]'),
+    ('The space', 'Full dining-room buyout', 'The whole room is yours — flexible seating for large groups. [AV / TV] for slides or a toast. [CONFIRM]'),
     ('Prix fixe menus', 'From [$XX] per guest', 'Three courses served family-style: appetizer platter with three chutneys, two or three mains, rice, naan, dessert. Vegetarian and mixed menus.'),
     ('Bar', 'Full bar, open or hosted', 'Cocktails, wine, Indian beer. Set a tab limit or run a drink ticket. [CONFIRM minimums]'),
 ]
@@ -171,8 +171,8 @@ CATERING_FAQ = [
     ('Do you deliver catering?', f'Yes. Delivery is $30 and up depending on distance, weekdays 11:30–2 through ezCater. Evenings, weekends and up to {DELIVERY_RADIUS} by arrangement. Pickup at 106 Market St any day.'),
     ('Can you handle vegetarian, vegan and gluten-free guests?', 'Our menu has sixteen vegetarian mains. Every tray is labeled; vegan and gluten-free dishes are marked on request. [CONFIRM]'),
     ('Can I order catering on ezCater?', 'Yes. We have been on ezCater since 2016 with a 5.0 rating and 100% on-time record. $100 minimum, $20 off weekday orders over $500 through 12/31/2026.'),
-    ('How many people fit the private room?', f'Seated {ROOM_SEATED}, standing [XX]. Larger parties can take the main dining room on a buyout; ask.'),
-    ('Is there a room fee or minimum?', '[No room fee / $XX] with a food and drink minimum of [$XX] on weekends. [CONFIRM]'),
+    ('Can you host a private event or large group?', 'We don’t have a separate private room, but you can buy out our main dining room for a private event, and we can accommodate large groups. Tell us your date and headcount through the catering form and we’ll get back to you.'),
+    ('Is there a buyout minimum?', 'Dining-room buyouts carry a food-and-drink minimum that depends on the day and headcount. [CONFIRM]'),
     ('Can we bring a cake?', 'Yes. [Cake fee $X / no fee.] We’ll plate it with kulfi if you like.'),
 ]
 
@@ -199,7 +199,7 @@ LLMS_TXT = '''# Tandoori Nights
 - Hours: Mon–Fri 11:30am–2:30pm and 4:30–10pm; Sat–Sun 11:30am–10pm. Weekday lunch buffet 11:30–2:30.
 - Most ordered: butter chicken (chicken makhani), chicken tikka masala, palak paneer. Uber Eats rating 4.7 from 2,000+ ratings.
 - Catering across the DMV: trays in four sizes (small 15–20 to extra-large 45–50); order multiple XL trays or a full-service buffet for larger groups — no upper limit. Small chicken tray $100, vegetable $75, paneer $85, chicken biryani $100. $100 minimum. Rating 5.0.
-- Private dining room available for events.
+- Dining-room buyouts available for private events and large groups (no separate private room).
 - Only location; the Bethesda location is closed.
 
 ## Pages

@@ -49,19 +49,21 @@ Please don't leave anything blank — anything we don't hear back on has to stay
 
 ---
 
-## 3. Private room & private events
+## 3. Private events & dining-room buyouts
 
-9. **Seated capacity** — how many guests can the private room seat? ______
+*(You don't have a separate private room — the site now says guests can buy out the main dining room for private events and large groups. These questions are about that.)*
 
-10. **Standing / reception capacity** of the private room? ______
+9. **Buyout capacity** — how many guests can you seat for a full dining-room buyout? ______
 
-11. Does the private room have a **TV or screen** for slideshows/toasts? (yes / no) ______
+10. **Largest group** you can accommodate (seated, and reception/standing style)? ______
 
-12. **Prix-fixe menu price** — starting price per guest for a set menu in the private room? From $______ per guest
+11. Do you have a **TV or screen** for slideshows/toasts at events? (yes / no) ______
 
-13. **Room fee** — is there a fee to use the private room? (no fee / $______)
+12. **Prix-fixe menu price** — starting price per guest for a set event menu? From $______ per guest
 
-14. **Food & drink minimum** — is there a minimum spend? (none / $______ , and does it differ on weekends? ______)
+13. **Buyout food-and-drink minimum** — is there one, and does it differ by day/weekend? (none / $______ ) ______
+
+14. **When can you host buyouts?** Any days/times you can (or can't) do a full buyout? ______
 
 15. **Bar for events** — any minimum for an open or hosted bar? (none / $______ )
 

@@ -82,7 +82,8 @@ def page(path, title, desc, active, body, ld=(), og_image='spread-hero.jpg', cru
 <link rel="canonical" href="{canon}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Tandoori Nights"><meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{SITE}/images/{og_image}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#F6EEDD">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Barlow+Condensed:wght@500;600&display=swap">
 <link rel="stylesheet" href="/css/site.css">
@@ -148,7 +149,7 @@ body = f'''
 </div>
 </section>
 <section class="section linen"><div class="wrap doors">{doors}</div></section>
-{pic('lamb-chops-tandoori.jpg', 'Tandoori lamb chops off the clay oven at Tandoori Nights', 'band', sizes='100vw')}
+{pic('mural-artwork.jpg', MURAL_ALT, 'band', 2172, 724, sizes='100vw')}
 <section class="section dark"><div class="wrap two">
 <div class="stack"><p class="lbl">Indian catering in Gaithersburg</p><h2>{HOME_CATERING_H2}</h2><p>{HOME_CATERING_P}</p>
 <div class="rows">{''.join(f'<div class="row"><b>{a}</b><span>{b}</span></div>' for a, b in HOME_CATERING_ROWS)}</div>
@@ -159,7 +160,7 @@ body = f'''
 <div class="stack"><p class="lbl">Dine in · Kentlands Market Square</p><h2>Hours &amp; directions</h2>
 <address>{ADDRESS_1}, Kentlands<br>{CITY}, {STATE} {ZIP}</address>
 {HOURS_TABLE}
-<p>Reservations on <a href="{OPENTABLE}" rel="noopener">OpenTable</a> or at <a href="tel:{PHONE_E164}">{PHONE}</a>. Walk-ins welcome. Private room for up to {ROOM_SEATED}.</p>
+<p>Reservations on <a href="{OPENTABLE}" rel="noopener">OpenTable</a> or at <a href="tel:{PHONE_E164}">{PHONE}</a>. Walk-ins welcome. Dining-room buyouts available for private events and large groups.</p>
 <div class="btns"><a class="btn btn-outline" href="{MAPS}" rel="noopener">Get directions</a><a class="btn btn-outline" href="tel:{PHONE_E164}">Call</a></div></div>
 <div class="stack">{pic('dining-room-mural.jpg', 'The dining room at Tandoori Nights under the hand-painted mural')}<p style="font-style:italic">The dining room. Reviewers call it “cozy,” “quiet” and “clean and bright.” Free public lot out front.</p></div>
 </div></section>
@@ -194,8 +195,20 @@ for i, (name, img, blurb, items) in enumerate(MENU):
     menu_ld["hasMenuSection"].append({"@type": "MenuSection", "name": re.sub('&amp;', '&', name),
         "hasMenuItem": [menu_item_ld(name, n, pr, d) for n, pr, d in items]})
 popular = ''.join(f'<a class="chip" href="/menu/{x["slug"]}/">{x["name"].split(" (")[0]}</a>' for x in DISHES)
-popular_block = f'<section class="section-tight wrap stack"><p class="lbl">Most-loved dishes</p><div class="chips">{popular}</div></section>'
-body = hero('Menu', 'Menu &amp; prices.', MENU_INTRO) + f'<div class="wrap chips" style="padding-bottom:40px">{chips}</div>' + popular_block + cats + faq_html(MENU_FAQ, 'Menu questions')
+popular_block = f'<section class="section wrap stack"><p class="lbl">Explore</p><h2>Read more about our most-loved dishes</h2><p>Deep dives on the dishes Gaithersburg orders most — how they’re made, what to pair them with.</p><div class="chips" style="margin-top:8px">{popular}</div></section>'
+menu_nav = f'<nav class="menu-nav" aria-label="Menu categories"><div class="menu-nav-inner">{chips}</div></nav>'
+menu_nav_js = ('<script>(function(){'
+ 'var nav=document.querySelector(".menu-nav");if(!nav)return;'
+ 'var inner=nav.querySelector(".menu-nav-inner"),links={};'
+ 'nav.querySelectorAll("a.chip").forEach(function(a){links[a.getAttribute("href").slice(1)]=a;});'
+ 'if(!("IntersectionObserver" in window))return;'
+ 'var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){'
+ 'var a=links[e.target.id];if(a){for(var k in links)links[k].classList.remove("active");a.classList.add("active");'
+ 'inner.scrollTo({left:a.offsetLeft-inner.clientWidth/2+a.offsetWidth/2,behavior:"smooth"});}}});},'
+ '{rootMargin:"-45% 0px -50% 0px",threshold:0});'
+ 'document.querySelectorAll(".menu-cat[id]").forEach(function(c){io.observe(c);});'
+ '})();</script>')
+body = hero('Menu', 'Menu &amp; prices.', MENU_INTRO) + menu_nav + cats + popular_block + faq_html(MENU_FAQ, 'Menu questions') + menu_nav_js
 urls.append(page('/menu/', 'Menu & Prices | Tandoori Nights, Gaithersburg MD', MENU_DESC, 'menu', body, [menu_ld, faq_ld(MENU_FAQ)], 'butter-chicken.jpg', crumbs=[('Menu', '/menu/')]))
 
 # ---------------- DISH PAGES (per-dish SEO landing pages) ----------------
@@ -232,7 +245,7 @@ body = hero('Lunch buffet', 'Indian lunch buffet in Gaithersburg, Monday to Frid
 <section class="section-tight wrap two">{pic('spread-hero.jpg', 'Tandoori Nights buffet dishes: tandoori chicken, butter chicken, palak paneer, naan, chaat, biryani and desserts')}
 <div class="stack"><p class="lbl">What’s on the line</p><h2>{BUFFET_H2}</h2><div class="rows">{''.join(f'<div class="row"><b>{a}</b><span>{b}</span></div>' for a, b in BUFFET_ROWS)}</div>
 <div class="btns"><a class="btn btn-primary" href="{OPENTABLE}" rel="noopener">Reserve a table</a><a class="btn btn-outline" href="{INSTAGRAM}" rel="noopener">Today’s lineup on Instagram</a></div></div></section>
-{pic('pani-puri-shots.jpg', 'Pani puri shots at Tandoori Nights', 'band', sizes='100vw')}
+{pic('mural-artwork.jpg', MURAL_ALT, 'band', 2172, 724, sizes='100vw')}
 <section class="section wrap">{tiles(BUFFET_TILES)}</section>
 <section class="section linen"><div class="wrap side"><div class="stack"><p class="lbl">From the reviews</p><h2>What people say about lunch.</h2></div>
 <div class="two two-start">{''.join(f'<blockquote><p>“{q}”</p><span class="lbl" style="color:var(--muted)">{s}</span></blockquote>' for q, s in BUFFET_QUOTES)}</div></div></section>
@@ -246,10 +259,10 @@ def tray_table(head, rows):
 pieces = f'<div class="piece-head"><span>Appetizers by the piece · min 20</span><span>Each</span></div>' + ''.join(f'<div class="piece"><span>{n}</span><span class="price">{p}</span></div>' for n, p in PIECES)
 form = f'''<form id="quote" class="quote" name="catering" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company">
 <input type="hidden" name="form-name" value="catering"><p class="sr"><label>Leave blank: <input name="company"></label></p>
-<h2 style="font-size:32px">Get a catering quote</h2><p style="font-size:17px">For weekends, evenings, buffets, the private room, and anything over 50 guests. We reply within {REPLY_TIME}.</p>
+<h2 style="font-size:32px">Get a catering quote</h2><p style="font-size:17px">For weekends, evenings, buffets, dining-room buyouts, and anything over 50 guests. We reply within {REPLY_TIME}.</p>
 <div class="pair"><label>Event date<input type="date" name="date" required></label><label>Guests<input type="number" name="guests" min="1" placeholder="50" required></label></div>
 <label>Type of event<select name="event"><option>Office lunch</option><option>Corporate event</option><option>Wedding or celebration</option><option>Birthday or party</option><option>Holiday gathering</option></select></label>
-<label>Service<select name="service"><option>Tray order (pickup or delivery)</option><option>Full-service buffet at my venue</option><option>Private room at the restaurant</option><option>Not sure yet</option></select></label>
+<label>Service<select name="service"><option>Tray order (pickup or delivery)</option><option>Full-service buffet at my venue</option><option>Private event / dining-room buyout</option><option>Not sure yet</option></select></label>
 <div class="pair"><label>Name<input type="text" name="name" autocomplete="name" required></label><label>Phone<input type="tel" name="phone" autocomplete="tel" required></label></div>
 <label>Email<input type="email" name="email" autocomplete="email" required></label>
 <label>Anything else<textarea name="notes" placeholder="Venue, dietary needs, dishes you have in mind"></textarea></label>
@@ -262,23 +275,23 @@ body = f'''<section class="section-tight wrap two two-start">
 {form}</section>
 <section class="section wrap stack"><h2>Three ways to cater, from a $40 tray of rice to a wedding for 200.</h2>
 <div class="three">{''.join(f'<article class="stack">{pic(img, alt) if img else ""}<h3>{h}</h3><p>{p}</p><span class="lbl">{l}</span></article>' for img, alt, h, p, l in CATERING_FORMATS)}</div></section>
-{pic('aloo-tikki-chaat.jpg', 'Aloo tikki chaat at Tandoori Nights', 'band', sizes='100vw')}
+{pic('mural-artwork.jpg', MURAL_ALT, 'band', 2172, 724, sizes='100vw')}
 <section id="trays" class="section wrap stack menu-cat"><div class="side" style="align-items:end"><div class="stack"><p class="lbl">Catering menu</p><h2>Tray prices.</h2></div><p>{TRAY_NOTE}</p></div>
 <div class="two two-start" style="gap:64px"><div>{tray_table('Entrées', ENTREES)}<div style="height:28px"></div>{tray_table('Rice &amp; biryani', RICE)}</div>
 <div>{pieces}<div style="height:28px"></div>{tray_table('Appetizer trays, sides &amp; sweets', TRAYS)}<p style="margin-top:18px;font-size:17px">{BREADS_NOTE}</p></div></div>
 <div class="btns"><a class="btn btn-primary" href="/catering/#quote">Request a catering quote</a><a class="btn btn-outline" href="/catering-menu.pdf" download>Download the menu (PDF)</a></div></section>
 <section class="section linen"><div class="wrap stack"><h2>Catering by occasion</h2><div class="four" style="border-top:1px solid var(--rule)">{''.join(f'<a class="stack" href="/catering/#quote" style="color:var(--ink);padding-top:24px"><span style="font-size:28px;font-weight:500">{h}</span><p>{p}</p><span class="lbl">{l} →</span></a>' for h, p, l in OCCASIONS)}</div></div></section>
-<section class="section wrap side two-start"><div class="stack"><h2>How catering works</h2>{pic('samosa-chaat.jpg', 'Samosa chaat at Tandoori Nights', sizes='(max-width:760px) 100vw, 380px')}</div>
+<section class="section wrap side two-start"><div class="stack"><h2>How catering works</h2>{pic('mural-artwork.jpg', 'Lotus detail from the dining room mural', sizes='(max-width:760px) 100vw, 380px')}</div>
 <ol style="margin:0;padding:0;list-style:none" class="rows">{''.join(f'<li class="row" style="grid-template-columns:80px 1fr"><span style="font-size:56px;font-weight:500;color:var(--red);line-height:1">{i+1}</span><div class="stack" style="gap:6px"><span style="font-size:28px;font-weight:500">{h}</span><p>{p}</p></div></li>' for i, (h, p) in enumerate(HOW_IT_WORKS))}</ol></section>
 <section id="private-events" class="section dark menu-cat"><div class="wrap stack"><p class="lbl">Private events · in the restaurant</p><h2>{EVENTS_H2}</h2><p style="font-size:clamp(19px,1.6vw,21px);max-width:900px">{EVENTS_INTRO}</p></div>
-<div class="wrap two two-start" style="margin-top:40px">{pic('private-dining-room.jpg', 'The private dining room at Tandoori Nights: striped wood wall, white tablecloths, red and black leather chairs')}<div class="stack">{pic('cocktails-bar.jpg', 'Cocktails on the bar at Tandoori Nights')}<p>To book the room, fill out the <a href="/catering/#quote">catering form</a> at the top of this page, choose “Private room,” and we’ll get back to you.</p></div></div>
+<div class="wrap two two-start" style="margin-top:40px">{pic('private-dining-room.jpg', 'The Tandoori Nights dining room set with white tablecloths and leather chairs')}<div class="stack">{pic('cocktails-bar.jpg', 'Cocktails on the bar at Tandoori Nights')}<p>To book a buyout, fill out the <a href="/catering/#quote">catering form</a> at the top of this page, choose “Private event / dining-room buyout,” and we’ll get back to you.</p></div></div>
 <div class="wrap" style="margin-top:40px">{tiles(EVENT_TILES)}</div></section>
 ''' + faq_html(CATERING_FAQ, 'Catering &amp; event questions')
 cat_ld = {"@context": "https://schema.org", "@type": "Service", "@id": SITE + "/catering/#service", "serviceType": "Indian catering", "provider": {"@id": SITE + "/#restaurant"},
           "areaServed": [{"@type": "City", "name": c} for c in SERVICE_AREA], "url": SITE + "/catering/",
           "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Catering trays", "itemListElement": [
               {"@type": "Offer", "itemOffered": {"@type": "Product", "name": f"{r[0]} tray (small, serves 15–20)"}, "price": r[2].strip('$'), "priceCurrency": "USD"} for r in ENTREES + RICE]}}
-venue_ld = {"@context": "https://schema.org", "@type": "EventVenue", "name": "Tandoori Nights private dining room", "url": SITE + "/catering/#private-events", "maximumAttendeeCapacity": ROOM_SEATED_NUM,
+venue_ld = {"@context": "https://schema.org", "@type": "EventVenue", "name": "Tandoori Nights dining room", "url": SITE + "/catering/#private-events",
             "address": {"@type": "PostalAddress", "streetAddress": ADDRESS_1, "addressLocality": CITY, "addressRegion": STATE, "postalCode": ZIP}}
 urls.append(page('/catering/', 'Indian Catering in Gaithersburg, MD | Tray Prices & Private Events | Tandoori Nights', CATERING_DESC, 'catering', body, [cat_ld, venue_ld, faq_ld(CATERING_FAQ)], 'appetizer-spread.jpg', crumbs=[('Catering &amp; events', '/catering/')]))
 
@@ -290,15 +303,14 @@ body = hero('Hours &amp; directions', 'Hours, parking and directions to Tandoori
 <div class="stack" style="gap:8px"><p class="lbl">Holidays</p><p>{HOLIDAYS}</p></div>
 <address>Tandoori Nights<br>{ADDRESS_1}<br>{CITY}, {STATE} {ZIP}<br><a class="lbl" href="tel:{PHONE_E164}" style="font-size:18px">{PHONE}</a></address>
 <div class="btns"><a class="btn btn-primary" href="{MAPS}" rel="noopener">Open in Google Maps</a><a class="btn btn-outline" href="{APPLE_MAPS}" rel="noopener">Apple Maps</a><a class="btn btn-outline" href="{OPENTABLE}" rel="noopener">Reserve on OpenTable</a></div></div>
-<div class="stack"><iframe title="Map to Tandoori Nights, 106 Market St, Gaithersburg" src="{MAP_EMBED}" width="100%" height="380" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-{pic('bar-entrance-elephant.jpg', 'The entrance and bar at Tandoori Nights with the painted wooden elephant')}</div></section>
+<div class="stack map-sticky"><iframe title="Map to Tandoori Nights, 106 Market St, Gaithersburg" src="{MAP_EMBED}" width="100%" height="460" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></section>
 <section class="section linen"><div class="wrap">{tiles(VISIT_TILES)}</div></section>
-{pic('naan-parantha-breads.jpg', 'Fresh naan and paranthas from the tandoor at Tandoori Nights', 'band', sizes='100vw')}
+{pic('mural-artwork.jpg', MURAL_ALT, 'band', 2172, 724, sizes='100vw')}
 ''' + faq_html(VISIT_FAQ, 'Visiting questions')
 urls.append(page('/hours-directions/', 'Hours, Parking & Directions | Tandoori Nights, Kentlands Gaithersburg', VISIT_DESC, 'visit', body, [faq_ld(VISIT_FAQ)], 'dining-room-mural.jpg', crumbs=[('Hours &amp; directions', '/hours-directions/')]))
 
 # ---------------- THANKS / 404 ----------------
-page('/thanks/', 'Thanks | Tandoori Nights', 'We got your catering request.', 'catering', hero('Thanks', 'Got it. We’ll be in touch.', f'We reply to catering and private-room requests within {REPLY_TIME}. Need it sooner? Call <a href="tel:{PHONE_E164}">{PHONE}</a>.'))
+page('/thanks/', 'Thanks | Tandoori Nights', 'We got your catering request.', 'catering', hero('Thanks', 'Got it. We’ll be in touch.', f'We reply to catering and private-event requests within {REPLY_TIME}. Need it sooner? Call <a href="tel:{PHONE_E164}">{PHONE}</a>.'))
 page('/404/', 'Page not found | Tandoori Nights', 'That page has moved.', 'home', hero('Not found', 'That page isn’t here.', 'Try the <a href="/menu/">menu</a>, <a href="/catering/">catering</a>, or <a href="/hours-directions/">hours &amp; directions</a>.'))
 h404 = open(os.path.join(OUT, '404', 'index.html')).read().replace('../', './')
 open(os.path.join(OUT, '404.html'), 'w').write(h404); shutil.rmtree(os.path.join(OUT, '404'))
@@ -307,7 +319,7 @@ open(os.path.join(OUT, '404.html'), 'w').write(h404); shutil.rmtree(os.path.join
 shutil.copytree('images', os.path.join(OUT, 'images'), dirs_exist_ok=True)
 shutil.copytree('css', os.path.join(OUT, 'css'), dirs_exist_ok=True)
 if os.path.exists('catering-menu.pdf'): shutil.copy('catering-menu.pdf', OUT)
-open(os.path.join(OUT, 'favicon.svg'), 'w').write('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#F6EEDD"/><text x="32" y="46" font-family="Impact,Arial Narrow,sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#DB8E2E">TN</text></svg>')
+if os.path.isdir('icons'): shutil.copytree('icons', OUT, dirs_exist_ok=True)  # favicon.ico/.svg, apple-touch-icon, icon-192/512, site.webmanifest
 today = datetime.date.today().isoformat()
 open(os.path.join(OUT, 'sitemap.xml'), 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>{u}</loc><lastmod>{today}</lastmod></url>\n' for u in urls) + '</urlset>\n')
 open(os.path.join(OUT, 'robots.txt'), 'w').write(f'User-agent: *\nAllow: /\nDisallow: /thanks/\n\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
